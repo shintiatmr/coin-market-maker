@@ -1,0 +1,6 @@
+com/ajaib/coin/market/maker/outbound/feign/fallback/CoinTestFallback.class
+com/ajaib/coin/market/maker/outbound/feign/config/AjaibFeignConfig.class
+com/ajaib/coin/market/maker/outbound/feign/CoinTestFeign.class
+com/ajaib/coin/market/maker/outbound/feign/config/DefaultFeignConfig.class
+com/ajaib/coin/market/maker/outbound/feign/fallback/CoinTestFallback$1.class
+com/ajaib/coin/market/maker/outbound/EventPublisher.class

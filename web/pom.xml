@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>web</artifactId>
+  <build>
+    <finalName>${project.parent.name}-${project.parent.version}</finalName>
+    <plugins>
+      <plugin>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <groupId>org.springframework.boot</groupId>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <skipTests>true</skipTests>
+        </configuration>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>2.22.2</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>3.1.1</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+        </configuration>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>3.8.0</version>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.ajaib.coin.market.maker</groupId>
+      <artifactId>outbound-impl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.ajaib.coin.market.maker</groupId>
+      <artifactId>inbound-impl</artifactId>
+    </dependency>
+    <dependency>
+      <artifactId>service-impl</artifactId>
+      <groupId>com.ajaib.coin.market.maker</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>configuration</artifactId>
+      <groupId>com.ajaib.coin.market.maker</groupId>
+    </dependency>
+    <dependency>
+      <groupId>com.ajaib.coin.market.maker</groupId>
+      <artifactId>library</artifactId>
+    </dependency>
+  </dependencies>
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <packaging>jar</packaging>
+  <parent>
+    <artifactId>coin-market-maker</artifactId>
+    <groupId>com.ajaib.coin.market.maker</groupId>
+    <version>1.0.0-1-SNAPSHOT</version>
+  </parent>
+
+</project>

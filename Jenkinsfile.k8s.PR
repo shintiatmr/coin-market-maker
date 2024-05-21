@@ -1,0 +1,45 @@
+podTemplate(
+	containers: [
+		containerTemplate(name: 'maven', image: 'maven:3.6.3-jdk-11', ttyEnabled: true, command: 'cat', args: '', resourceRequestCpu: '0.3', resourceRequestMemory: '500Mi')
+	],
+	volumes: [
+		persistentVolumeClaim(claimName: 'nfs-jenkins-storage-pvc', mountPath: '/var/maven/repository')
+	],
+	serviceAccount: 'jenkins-service-account'
+) {
+	node(POD_LABEL) {
+		container('maven') {
+			checkout scm
+			stage('Build and Test') {
+				withSonarQubeEnv(installationName: 'sonar-ajaib') {
+					configFileProvider([configFile(fileId: 'MAVEN_SETTINGS', variable: 'MAVEN_SETTINGS')]) {
+						sh "mvn -s ${MAVEN_SETTINGS} clean org.jacoco:jacoco-maven-plugin:0.8.5:prepare-agent install sonar:sonar"
+					}
+				}
+			}
+
+			stage("Quality Gate") {
+				maxRetry = 10
+				def index = 0
+				def inProgress = true
+				while (inProgress && index < maxRetry) {
+					try {
+						echo "Retries number: " + index
+						timeout(time: 20, unit: 'SECONDS') {
+							def qg = waitForQualityGate()
+							if (qg.status != 'OK') {
+								error "Pipeline aborted due to quality gate failure: ${qg.status}"
+							}
+							inProgress = false
+						}
+					} catch (InterruptedException e) {
+						if (index == maxRetry - 1) {
+							error "Pipeline aborted due to quality gate failure: TIMEOUT"
+						}
+					}
+					index++
+				}
+			}
+		}
+	}
+}

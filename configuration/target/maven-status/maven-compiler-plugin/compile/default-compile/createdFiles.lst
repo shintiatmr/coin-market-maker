@@ -1,0 +1,8 @@
+com/ajaib/coin/market/maker/config/CacheConfig.class
+com/ajaib/coin/market/maker/config/SwaggerConfig.class
+com/ajaib/coin/market/maker/config/FeignConfig.class
+com/ajaib/coin/market/maker/config/MicrometerConfig$1.class
+com/ajaib/coin/market/maker/config/KafkaConsumerConfig.class
+com/ajaib/coin/market/maker/config/KafkaProducerConfig.class
+com/ajaib/coin/market/maker/config/MapperConfig.class
+com/ajaib/coin/market/maker/config/MicrometerConfig.class
